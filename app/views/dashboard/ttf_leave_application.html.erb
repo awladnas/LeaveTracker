@@ -1,0 +1,8 @@
+<h1>Leave Application</h1>
+
+
+<div class="col-lg-12">
+  <% ttf_leaves(@user).each do |leave|%>
+    <%= render 'accept_leave_form', :leave => leave %>
+  <% end %>
+</div>
