@@ -30,6 +30,7 @@ class LeavesController < ApplicationController
     @leave.leave_status = 'PENDING'
     @leave.user_id = current_user.id
     @leave.save
+    flash[:notice] = 'Leave was successfully Created.'
     respond_with(@leave)
   end
 
@@ -37,6 +38,8 @@ class LeavesController < ApplicationController
     @leave.update(leave_params)
     # notify applicant by email
     LeaveMailer::update_status(current_user, @leave.user, @leave).deliver!
+    flash[:notice] = 'Leave was successfully Updated.'
+    respond_with(@leave, location: ttf_pending_leave_path())
   end
 
   def destroy
