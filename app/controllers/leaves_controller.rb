@@ -1,7 +1,12 @@
 class LeavesController < ApplicationController
   before_action :set_leave, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
-  respond_to :html
+  before_action :authenticate_user!
+
+  before_action :authenticate_super_user!, :only => [:update, :edit, :show]
+
+  respond_to :html, :js
 
   def index
     @leaves = Leave.all
@@ -23,13 +28,15 @@ class LeavesController < ApplicationController
   def create
     @leave = Leave.new(leave_params)
     @leave.leave_status = 'PENDING'
+    @leave.user_id = current_user.id
     @leave.save
     respond_with(@leave)
   end
 
   def update
     @leave.update(leave_params)
-    respond_with(@leave)
+    # notify applicant by email
+    LeaveMailer::update_status(current_user, @leave.user, @leave).deliver!
   end
 
   def destroy
@@ -45,12 +52,18 @@ class LeavesController < ApplicationController
     end
   end
 
+  def leave_count
+    if params[:start].present? && params[:end].present?
+     @leave_days = Leave.total_day(DateTime.parse(params[:start]), DateTime.parse(params[:end]))
+      # add new field for day count
+    end
+  end
   private
     def set_leave
       @leave = Leave.find(params[:id])
     end
 
     def leave_params
-      params.require(:leave).merge(:user_id => current_user.id).permit(:user_id, :leave_type, :leave_status, :start_date, :end_date, :content)
+      params.require(:leave).permit(:user_id, :leave_type, :leave_status, :start_date, :end_date, :content)
     end
 end

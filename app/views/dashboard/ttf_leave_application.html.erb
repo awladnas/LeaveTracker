@@ -2,7 +2,19 @@
 
 
 <div class="col-lg-12">
-  <% ttf_leaves(@user).each do |leave|%>
-    <%= render 'accept_leave_form', :leave => leave %>
-  <% end %>
+  <table class="table" id="leave-list">
+    <thead>
+        <th>User</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Sick Type</th>
+        <th>Available Hours</th>
+        <th>Status</th>
+        <th>Action</th>
+    </thead>
+
+      <% ttf_leaves(@user).each do |leave|%>
+        <%= render 'accept_leave_form', :leave => leave %>
+      <% end %>
+  </table>
 </div>

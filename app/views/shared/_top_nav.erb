@@ -2,23 +2,52 @@
   <div class="navbar-header">
     <a class="navbar-brand" href="/">Leave Tracker</a>
   </div>
+
   <div>
     <ul class="nav navbar-nav" id="navigation">
-      <li class="active"><%= link_to 'Dashboard', root_path %></li>
-      <li><%= link_to 'Apply for leave', new_leafe_path %></li>
+      <li class="active">
+        <%= link_to 'Dashboard', root_path %>
+      </li>
+
+      <li>
+        <%= link_to 'Apply for leave', new_leafe_path %>
+      </li>
+
       <% if is_ttf?(current_user) %>
-      <li><%= link_to 'Pending Leave', ttf_pending_leave_path %></li>
+        <li><%= link_to 'Applied Leave', ttf_pending_leave_path %></li>
       <% end%>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           Leave Details <b class="caret"></b>
         </a>
+
         <ul class="dropdown-menu">
-          <li> <%= link_to 'Casual', show_leave_path('casual') %></li>
-          <li class="divider"></li>
-          <li><%=  link_to 'Sick', show_leave_path('sick')%></li>
+          <li>
+            <%= link_to 'Casual', show_leave_path('casual') %>
+          </li>
+          <li class="divider">
+
+          </li>
+          <li>
+            <%=  link_to 'Sick', show_leave_path('sick')%>
+          </li>
         </ul>
+
       </li>
+      <li class="pull-right">
+        <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+      </li>
+
     </ul>
+
   </div>
 </nav>
+
+<script type="text/javascript">
+    $(function() {
+        //remove active li class
+        $("#navigation li").removeClass('active');
+        // add active class to current li
+        $('a[href="' + window.location.pathname + '"]').parent().addClass('active');
+    });
+</script>

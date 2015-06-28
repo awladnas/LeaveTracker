@@ -6,7 +6,8 @@
       <th>User</th>
       <th>Leave type</th>
       <th>Leave status</th>
-      <th>Leave date</th>
+      <th>Start date</th>
+      <th>End date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,10 +18,9 @@
         <td><%= leafe.user_id %></td>
         <td><%= leafe.leave_type %></td>
         <td><%= leafe.leave_status %></td>
-        <td><%= leafe.leave_date %></td>
-        <td><%= link_to 'Show', leafe %></td>
-        <td><%= link_to 'Edit', edit_leafe_path(leafe) %></td>
-        <td><%= link_to 'Destroy', leafe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= leafe.start_date %></td>
+        <td><%= leafe.end_date %></td>
+
       </tr>
     <% end %>
   </tbody>

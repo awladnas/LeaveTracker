@@ -19,10 +19,13 @@
 
 
 $(function() {
+    //add date picker to all class of .datepicker
     $('.datepicker').datepicker();
-    $("#navigation li").click(function(){
-        console.log($("#navigation").find('.active').html());
-        $("#navigation").find('li.active').removeClass('active');
-        $(this).addClass('active');
-    });
+    //
+    //var checkLeaveData = function (e) {
+    //    e.preventDefault();
+    //    var leave = new Leave();
+    //    var objValid = Leave.validateLeave();
+    //    return false;
+    //}
 });

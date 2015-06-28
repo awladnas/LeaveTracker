@@ -14,21 +14,41 @@
 
   <div class="field">
     <%= f.label :leave_type %><br>
-    <%= f.select :leave_type, options_for_select([['Casual','CASUAL'], ['Sick', 'SICK']]), {:prompt => 'Leave Type'} %>
+    <%= f.select :leave_type, options_for_select([['Casual','CASUAL'], ['Sick', 'SICK']]), {:prompt => 'Leave Type'}, class: "form-control custom" %>
   </div>
   <div class="field">
-     <%= f.label :content %><br>
-     <%= f.text_area :content, :rows => 15, :cols => 50 %>
+     <%= f.label :content, "Your Message" %><br>
+     <%= f.text_area :content, :rows => 10,  class: "form-control" %>
   </div>
+
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.date_select :start_date, {:order => [:day, :month, :year], :start_date => Time.now, :start_year => Time.now.year, :end_year => Time.now.year + 1 }, {:class => "form-control custom-small"} %>
   </div>
+
   <div class="field">
     <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
+    <%= f.date_select :end_date, {:order => [:day, :month, :year], :start_year => Time.now.year, :end_year => Time.now.year + 1 }, {:class => "form-control custom-small"} %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="field">
+    <%= link_to  "Calculate days", count_leave_path(), class: "btn", remote: true, id: "calculate_days" %>
+    <span class="text-info"> Total days: <span class="js-days-count">0 </span></span>
+  </div>
+
+    <div class="actions">
+    <%= f.submit  "Apply", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(function(){
+      var leave_path = "<%= count_leave_path() %>";
+      $("#calculate_days").click(function(){
+          var path =  "?start=" + $("#leave_start_date_3i").val() + "-" + $("#leave_start_date_2i").val() + "-" + $("#leave_start_date_1i").val()  +  "&end=" + $("#leave_end_date_3i").val() +  "-" + $("#leave_end_date_2i").val() + "-" + $("#leave_end_date_1i").val();
+          $(this).attr("href", leave_path + path);
+          return true;
+      });
+
+  })
+</script>

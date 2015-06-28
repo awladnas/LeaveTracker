@@ -2,8 +2,8 @@
 
 <div class="col-lg-12">
   <div class="info">
-   <div> <span> Total Remaining: <%= get_left_leave_hours(params[:type], current_user)%> Hours</span> </div>
-    <span> Total Consumed: <%= get_consumed_leave_hours(params[:type], current_user)%> Hours</span>
+   <div> <span> Total Remaining: <%= current_user.hours_left(params[:type])%> Hours</span> </div>
+    <span> Total Consumed: <%= current_user.hours_left(params[:type])%> Hours</span>
   </div>
   <table class="table table-bordered">
     <thead>

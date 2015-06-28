@@ -1,23 +1,23 @@
 <h1><%= @user.email%></h1>
 <div class="col-lg-12">
 
-    <div class="col-lg-6" style="border: 1px solid">
+    <div class="col-lg-6">
       <h3>Casual: </h3>
         <div >
-          <span>Leave Left: <%= @user.total_casual_left %> Hours</span>
+          <span>Leave Left: <%= @user.hours_left('CASUAL') %> Hours</span>
         </div>
         <div >
-          <span> Leave Consumed: <%= @user.total_casual_consume %> Hours</span>
+          <span> Leave Consumed: <%= @user.total_casual_consume || 0.0 %> Hours</span>
         </div>
     </div>
 
-  <div class="col-lg-6" style="border: 1px solid">
+  <div class="col-lg-6">
     <h3>Sick: </h3>
         <div >
-          <span> Leave Left: <%= @user.total_sick_left %> Hours</span>
+          <span> Leave Left: <%= @user.hours_left('SICK') %> Hours</span>
         </div>
         <div >
-          <span> Leave Consumed: <%= @user.total_sick_consume %> Hours</span>
+          <span> Leave Consumed: <%= @user.total_sick_consume || 0.0 %> Hours</span>
         </div>
     </div>
 </div>

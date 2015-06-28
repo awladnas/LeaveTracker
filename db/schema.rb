@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505113112) do
+ActiveRecord::Schema.define(version: 20150628195707) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 20150505113112) do
     t.datetime "updated_at"
     t.text     "content"
     t.date     "end_date"
+    t.text     "supervisor_message"
+  end
+
+  create_table "settings", force: true do |t|
+    t.float    "yearly_casual_leave", limit: 24
+    t.float    "yearly_sick_leave",   limit: 24
+    t.string   "weekend_day_one"
+    t.string   "weekend_day_two"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -70,11 +80,9 @@ ActiveRecord::Schema.define(version: 20150505113112) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "total_casual_left",      limit: 24
     t.float    "total_casual_consume",   limit: 24
-    t.float    "total_sick_left",        limit: 24
     t.float    "total_sick_consume",     limit: 24
-    t.integer  "ttf_id",                            default: 0,  null: false
+    t.integer  "supervisor",                        default: 0,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

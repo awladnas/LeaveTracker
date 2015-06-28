@@ -1,0 +1,48 @@
+<%= form_for(@leave) do |f| %>
+    <% if @leave.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@leave.errors.count, "error") %> prohibited this leave from being saved:</h2>
+
+          <ul>
+            <% @leave.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <div class="field">
+      <%= f.label :leave_type %><br>
+      <%= @leave.leave_type%>
+    </div>
+    <div class="field">
+      <%= f.label :content, "User Message" %><br>
+      <%= @leave.content %>
+    </div>
+
+    <div class="field">
+      <%= f.label :start_date %>
+      <%= @leave.start_date %>
+    </div>
+
+    <div class="field">
+      <%= f.label :end_date %>
+      <%= @leave.end_date %>
+    </div>
+
+    <div class="field">
+        <%= f.label :leave_status %><br>
+        <%= f.select :leave_status, options_for_select([['Pending', 'PENDING'], ['Recommanded', 'RECOMMANDED'], ['Not Recommanded', 'NOT_RECOMANDED']]) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :supervisor_message, "Your Message" %><br>
+      <%= f.text_area :supervisor_message, :rows => 10,  class: "form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit  "Update", class: "btn btn-primary" %>
+    </div>
+<% end %>
+

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  get 'leave/pending' => 'dashboard#ttf_leave_application', as: :ttf_pending_leave
+  get 'leave/:type' => 'leaves#show_leave', as: :show_leave
+  get 'leaves/count_leave' => 'leaves#leave_count', as: :count_leave
+
   resources :leaves
 
   get 'dashboard/index'
@@ -15,8 +20,7 @@ Rails.application.routes.draw do
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
-    get 'leave/pending' => 'dashboard#ttf_leave_application', as: :ttf_pending_leave
-    get 'leave/:type' => 'leaves#show_leave', as: :show_leave
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
