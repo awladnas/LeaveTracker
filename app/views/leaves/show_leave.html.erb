@@ -5,18 +5,5 @@
    <div> <span> Total Remaining: <%= current_user.hours_left(params[:type])%> Hours</span> </div>
     <span> Total Consumed: <%= current_user.hours_left(params[:type])%> Hours</span>
   </div>
-  <table class="table table-bordered">
-    <thead>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Status</th>
-    </thead>
-    <% @leaves.each do |leave| %>
-    <tr>
-      <td><%= leave.start_date %></td>
-      <td><%= leave.end_date %></td>
-      <td><%= leave.leave_status %> </td>
-    </tr>
-    <% end %>
-  </table>
+  <%= render :partial => "leaves" , :locals =>{ :leaves => @leaves} %>
 </div>

@@ -4,8 +4,9 @@
     <td> <%= leave.end_date %></td>
     <td> <%= leave.leave_type %></td>
     <td> <%= leave.user.hours_left(leave.leave_type) %></td>
-    <td><%= leave.leave_status %>        <td>
-    <td><%= link_to "Update", edit_leafe_path(leave) %></td>
+    <td> <%= Leave.total_day(leave.start_date, leave.end_date) %></td>
+    <td><%= leave.leave_status %></td>
+    <td><%= link_to "Update", edit_leafe_path(leave) , class: "btn"%></td>
   </tr>
 
 

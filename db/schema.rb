@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628195707) do
+ActiveRecord::Schema.define(version: 20150630172633) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -56,15 +56,19 @@ ActiveRecord::Schema.define(version: 20150628195707) do
     t.text     "content"
     t.date     "end_date"
     t.text     "supervisor_message"
+    t.integer  "total_days",         default: 0
+    t.string   "total_minutes"
   end
 
   create_table "settings", force: true do |t|
-    t.float    "yearly_casual_leave", limit: 24
-    t.float    "yearly_sick_leave",   limit: 24
+    t.float    "yearly_casual_leave",  limit: 24
+    t.float    "yearly_sick_leave",    limit: 24
     t.string   "weekend_day_one"
     t.string   "weekend_day_two"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "daily_minutes"
+    t.string   "daily_earned_minutes"
   end
 
   create_table "users", force: true do |t|

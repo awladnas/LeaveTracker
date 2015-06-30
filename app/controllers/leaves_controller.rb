@@ -58,6 +58,8 @@ class LeavesController < ApplicationController
   def leave_count
     if params[:start].present? && params[:end].present?
      @leave_days = Leave.total_day(DateTime.parse(params[:start]), DateTime.parse(params[:end]))
+     @leave_minutes = Setting.last.daily_minutes.to_i * @leave_days.to_i
+
       # add new field for day count
     end
   end
@@ -67,6 +69,6 @@ class LeavesController < ApplicationController
     end
 
     def leave_params
-      params.require(:leave).permit(:user_id, :leave_type, :leave_status, :start_date, :end_date, :content)
+      params.require(:leave).permit(:user_id, :leave_type, :leave_status, :start_date, :end_date, :content, :supervisor_message)
     end
 end

@@ -23,5 +23,14 @@ class LeaveMailer < ActionMailer::Base
     end
   end
 
+  def confirmed_leave(leave)
+    @leave = leave
+    subject = "Your #{leave.leave_type} leave #{leave.leave_status}."
+    mail(:to => leave.user.email,:subject => subject) do |format|
+      format.html
+      format.text
+    end
+  end
+
 
 end

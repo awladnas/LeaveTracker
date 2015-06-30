@@ -3,7 +3,7 @@ ActiveAdmin.register Setting do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-  permit_params :id, :yearly_casual_leave, :yearly_sick_leave, :weekend_day_one, :weekend_day_two
+  permit_params :id, :yearly_casual_leave, :yearly_sick_leave, :daily_hours, :daily_earned_hours,  :weekend_day_one, :weekend_day_two
 #
 # or
 #
@@ -20,6 +20,8 @@ ActiveAdmin.register Setting do
     column "Total dick leave hours", :yearly_sick_leave
     column :weekend_day_one
     column :weekend_day_two
+    column :daily_minutes
+    column :daily_earned_minutes
     actions :defaults => true
   end
 
@@ -31,6 +33,8 @@ ActiveAdmin.register Setting do
 
       f.input :yearly_casual_leave, label:"Total casual leave hours"
       f.input :yearly_sick_leave, label:"Total casual leave hours"
+      f.input :daily_minutes, label:"Working Minutes per day"
+      f.input :daily_earned_minutes, label:"Total added minutes per day"
       f.input :weekend_day_one, :as => :select , :collection =>['saturday','sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday']
       f.input :weekend_day_two, :as => :select , :collection =>['saturday','sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday']
     end

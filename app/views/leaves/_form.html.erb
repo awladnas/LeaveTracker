@@ -23,17 +23,19 @@
 
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date, {:order => [:day, :month, :year], :start_date => Time.now, :start_year => Time.now.year, :end_year => Time.now.year + 1 }, {:class => "form-control custom-small"} %>
+    <%= f.text_field :start_date,:class => "form-control custom-small datepicker"%>
   </div>
 
   <div class="field">
     <%= f.label :end_date %><br>
-    <%= f.date_select :end_date, {:order => [:day, :month, :year], :start_year => Time.now.year, :end_year => Time.now.year + 1 }, {:class => "form-control custom-small"} %>
+    <%= f.text_field :end_date, :class => "form-control custom-small datepicker" %>
   </div>
 
   <div class="field">
-    <%= link_to  "Calculate days", count_leave_path(), class: "btn", remote: true, id: "calculate_days" %>
-    <span class="text-info"> Total days: <span class="js-days-count">0 </span></span>
+    <span class="text-info">
+      Total Calculated days: <span class="js-days-count">0 </span>
+      Total Calculated minutes: <span class="js-minutes-count">0 </span>
+    </span>
   </div>
 
     <div class="actions">
@@ -44,10 +46,11 @@
 <script type="text/javascript">
   $(function(){
       var leave_path = "<%= count_leave_path() %>";
-      $("#calculate_days").click(function(){
-          var path =  "?start=" + $("#leave_start_date_3i").val() + "-" + $("#leave_start_date_2i").val() + "-" + $("#leave_start_date_1i").val()  +  "&end=" + $("#leave_end_date_3i").val() +  "-" + $("#leave_end_date_2i").val() + "-" + $("#leave_end_date_1i").val();
-          $(this).attr("href", leave_path + path);
-          return true;
+      $("#leave_end_date, #leave_start_date").change(function(){
+          if ($("#leave_start_date").val() && $("#leave_end_date").val()) {
+              var path = "?start=" + $("#leave_start_date").val() + "&end=" + $("#leave_end_date").val();
+              $.get(leave_path + path);
+          }
       });
 
   })

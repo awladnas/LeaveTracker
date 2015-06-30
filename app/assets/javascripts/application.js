@@ -20,12 +20,8 @@
 
 $(function() {
     //add date picker to all class of .datepicker
-    $('.datepicker').datepicker();
-    //
-    //var checkLeaveData = function (e) {
-    //    e.preventDefault();
-    //    var leave = new Leave();
-    //    var objValid = Leave.validateLeave();
-    //    return false;
-    //}
+    $('.datepicker').datepicker({
+        dateFormat: "dd-mm-yy",
+        minDate: 0
+    });
 });

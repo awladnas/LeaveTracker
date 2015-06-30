@@ -34,6 +34,8 @@ ActiveAdmin.register Leave do
     column :start_date
     column :end_date
     column :content
+    column :total_days
+    column :total_minutes
     actions :defaults => true
   end
 
@@ -41,8 +43,21 @@ ActiveAdmin.register Leave do
     def scoped_collection
       super.includes [:user]
     end
+
+    def update
+      if ["ACCEPT", "REJECT"].include?(params[:leave][:leave_status])
+         leave = Leave.find(params[:id])
+         LeaveMailer::confirmed_leave(leave).deliver!
+      end
+
+      update! do |format|
+        format.html { redirect_to admin_leaves_path }
+      end
+    end
+
   end
 
+  actions :all, :except => [:destroy]
 
   form do |f|
     f.inputs "New Leave" do
@@ -52,16 +67,17 @@ ActiveAdmin.register Leave do
         </div>".html_safe
       end
 
-      f.input :leave_type
-      f.input :leave_status, :as => :select , :collection =>['APPROVED','PENDING', 'RECOMMANDED', 'REJECT']
-      f.input :start_date
-      f.input :end_date
-      f.input :content
+      f.input :leave_type, :input_html => { :disabled => true }
+      f.input :start_date, :input_html => { :disabled => true }
+      f.input :end_date, :input_html => { :disabled => true }
+      f.input :content, :input_html => { :disabled => true }
+      f.input :supervisor_message, :input_html => { :disabled => true }
+      f.input :total_days, :input_html => { :disabled => true }
+      f.input :total_minutes, :input_html => { :disabled => true }
+      f.input :leave_status, :as => :select , :collection =>['APPROVED','PENDING', 'RECOMMENDED', 'REJECT']
     end
     f.actions
   end
-
-
 
 
   end
