@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">Leave Tracker</a>
+  </div>
+
+  <div>
+    <ul class="nav navbar-nav" id="navigation">
+      <li class="active">
+        <%= link_to "Login with Google", '/auth/google_oauth2' %>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script type="text/javascript">
+    $(function() {
+        //remove active li class
+        $("#navigation li").removeClass('active');
+        // add active class to current li
+        $('a[href="' + window.location.pathname + '"]').parent().addClass('active');
+    });
+</script>

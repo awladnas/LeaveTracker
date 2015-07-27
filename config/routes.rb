@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  resources :sessions, only: :index
+
+  get "/auth/:provider/callback" => 'users#create_auth_login'
+  get "/login" => 'users#auth_login'
+
   get 'leave/pending' => 'dashboard#ttf_leave_application', as: :ttf_pending_leave
   get 'leave/:type' => 'leaves#show_leave', as: :show_leave
   get 'leaves/count_leave' => 'leaves#leave_count', as: :count_leave

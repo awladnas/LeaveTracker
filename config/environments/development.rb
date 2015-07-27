@@ -35,4 +35,8 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  ENV['CLIENT_ID'] = "52537732849-ahec3puoopopglmdimirpm9v85gjel3b.apps.googleusercontent.com"
+  ENV['CLIENT_SECRET'] = "0Cnd2EgZKkHC-0G5uksT0GwE"
+  ENV['DOMAIN'] = "nascenia.com"
 end

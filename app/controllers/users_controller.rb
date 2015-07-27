@@ -61,6 +61,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def create_auth_login
+    user = User.from_omniauth(env["omniauth.auth"])
+    if user
+      sign_in user
+      # flash[:notice] = "Welcome #{user.name}!"
+      redirect_to root_path, :flash => { :notice => "Welcome #{user.name}!" }
+    else
+
+      redirect_to root_path, :flash => { :alert => "Invalid Domain!. Should be an email of #{ENV['DOMAIN']} " }
+    end
+  end
+
+  def auth_login
+    respond_to do |format|
+      format.html { render :layout => 'welcome' }
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

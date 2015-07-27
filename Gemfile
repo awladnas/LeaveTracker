@@ -49,4 +49,7 @@ gem "twitter-bootstrap-rails"
 gem 'jquery-ui-rails'
 gem 'activeadmin', github: 'activeadmin'
 
+gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-google-oauth2'
+
 

@@ -8,9 +8,13 @@
 </head>
 <body>
 <div class="container">
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <%= render '/shared/login_nav' %>
+  <% if flash[:notice] || flash[:alert]%>
+      <div class="waring-message alert alert-warning">
+        <p class="notice" id="notice"><%= notice %></p>
+        <p class="alert" id="alert"><%= alert %></p>
+      </div>
+  <% end %>
   <%= yield %>
 </div>
 </body>
